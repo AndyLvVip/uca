@@ -1,0 +1,8 @@
+rootProject.name = 'uca'
+include 'authserver'
+include 'configserver'
+include 'eurekaserver'
+include 'zipkinservice'
+include 'gwserver'
+include 'gwserver'
+
