@@ -36,7 +36,8 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
                         "password",
                         "client_credential"
                 )
-                .scopes("webclient", "mobileclient");
+                .scopes("webclient", "mobileclient")
+        ;
     }
 
     @Override
