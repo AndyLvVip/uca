@@ -25,9 +25,9 @@ public class UserController {
         return result;
     }
 
-    @PostMapping("/user/registry")
+    @PostMapping("/user/register")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void registry(@RequestBody User user) {
+    public void register(@RequestBody User user) {
         userService.create(user);
     }
 
