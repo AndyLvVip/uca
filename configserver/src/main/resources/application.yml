@@ -1,10 +1,9 @@
 server:
   port: 8888
 spring:
-  profiles:
-    active: native
   cloud:
     config:
       server:
-        native:
-          search-locations: file:./config_repo/eurekaserver,file:./config_repo/gwserver,file:./config_repo/authserver,file:./config_repo/zipkinservice
+        git:
+          uri: https://github.com/AndyLvVip/uca
+          search-paths: config_repo/authserver,config_repo/eurekaserver,config_repo/gwserver,config_repo/zipkinservice
