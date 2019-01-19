@@ -1,11 +1,17 @@
-= RESTful User API Specification
+= RESTful UCA OAuth API Specification
 
 {project-version}
 
 :doctype: book
 
-== Register a new user
+== User Register Api
 
 A `POST` request is used to register a new user
 
-operation::user-register[snippets='http-request,request-fields,request-body,curl-request,http-response,response-body']
+operation::user-register[snippets='http-request,request-fields,curl-request,http-response']
+
+== User Login Api
+
+A `POST` request is used to login
+
+operation::user-login[snippets='http-request,request-headers,request-parameters,request-fields,curl-request,http-response,response-fields']
