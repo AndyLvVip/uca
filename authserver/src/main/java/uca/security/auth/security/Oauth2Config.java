@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
 public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
@@ -17,13 +18,17 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final TokenStore tokenStore;
+
     public Oauth2Config(AuthenticationManager authenticationManagerBean,
                         UserDetailsService userDetailsServiceBean,
-                        PasswordEncoder passwordEncoder
+                        PasswordEncoder passwordEncoder,
+                        TokenStore tokenStore
     ) {
         this.authenticationManager = authenticationManagerBean;
         this.userDetailsService = userDetailsServiceBean;
         this.passwordEncoder = passwordEncoder;
+        this.tokenStore = tokenStore;
     }
 
     @Override
@@ -45,6 +50,7 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
         endpoints
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
+                .tokenStore(tokenStore)
         ;
     }
 }
