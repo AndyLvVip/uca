@@ -15,3 +15,9 @@ operation::user-register[snippets='http-request,request-fields,curl-request,http
 A `POST` request is used to login
 
 operation::user-login[snippets='http-request,request-headers,request-parameters,request-fields,curl-request,http-response,response-fields']
+
+== User Credential Api
+
+A `GET` request is used to get user credential
+
+operation::user-credential[snippets='http-request,request-headers,curl-request,http-response,response-fields']

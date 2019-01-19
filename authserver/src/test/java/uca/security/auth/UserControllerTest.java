@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 import uca.security.auth.domain.User;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Base64;
 
@@ -30,9 +32,11 @@ import static org.springframework.restdocs.headers.HeaderDocumentation.requestHe
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static uca.security.auth.CustomizationConfiguration.restDocument;
 
 @SpringBootTest(classes = AuthApplication.class)
 @RunWith(SpringRunner.class)
@@ -69,6 +73,7 @@ public class UserControllerTest {
         User user = new User();
         user.setUsername("dummy");
         user.setPassword(passwordEncoder.encode("password"));
+        user.setCreatedOn(LocalDateTime.now());
         when(userDetailsService.loadUserByUsername("dummy")).thenReturn(user);
     }
 
@@ -79,26 +84,17 @@ public class UserControllerTest {
         dummy.setPassword("password");
         this.mockMvc.perform(post("/user/register").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(dummy)))
                 .andExpect(status().isNoContent())
-        .andDo(CustomizationConfiguration.restDocument(requestFields(
+        .andDo(restDocument(requestFields(
                 fieldWithPath("username").description("Login user name"),
-                fieldWithPath("password").description("Login password"),
-                fieldWithPath("createdOn").ignored()
+                fieldWithPath("password").description("Login password")
         )))
         ;
     }
 
     @Test
     public void userLogin() throws Exception {
-        this.mockMvc.perform(post("/oauth/token")
-                .header("Authorization", "Basic " + Base64.getEncoder().encodeToString("client-1:client-1-secret".getBytes()))
-                .param("username", "dummy")
-                .param("password", "password")
-                .param("grant_type", "password")
-                .param("scope", "webclient")
-                .accept(MediaType.APPLICATION_JSON)
-        )
-                .andExpect(status().isOk())
-                .andDo(CustomizationConfiguration.restDocument(requestHeaders(
+        login()
+                .andDo(restDocument(requestHeaders(
                         headerWithName("Authorization").description("Basic auth credential")
                         )
                         , requestParameters(
@@ -128,6 +124,7 @@ public class UserControllerTest {
                 .param("scope", "webclient")
                 .accept(MediaType.APPLICATION_JSON)
         )
+                .andExpect(status().isOk())
                 ;
     }
 
@@ -147,7 +144,32 @@ public class UserControllerTest {
 
     }
 
-    public void userCredential() {
+    @Test
+    public void userCredential() throws Exception {
+        String resultString = login()
+                .andReturn().getResponse().getContentAsString();
+        JacksonJsonParser jsonParser = new JacksonJsonParser();
+        String access_token = jsonParser.parseMap(resultString).get("access_token").toString();
+
+        this.mockMvc.perform(get("/user")
+                .header("Authorization", "Bearer " + access_token)
+                .accept(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk())
+                .andDo(restDocument(requestHeaders(
+                        headerWithName("Authorization").description("Bearer token to access protected resource")
+                        )
+                        , responseFields(
+                                fieldWithPath("user.username").description("Username of the user")
+                                , fieldWithPath("user.createdOn.date.year").description("The year when the user created")
+                                , fieldWithPath("user.createdOn.date.month").description("The month when the user created")
+                                , fieldWithPath("user.createdOn.date.day").description("The day when the user created")
+                                , fieldWithPath("user.createdOn.time.hour").description("The hour when the user created")
+                                , fieldWithPath("user.createdOn.time.minute").description("The minute when the user created")
+                                , fieldWithPath("user.createdOn.time.second").description("The second when the user created")
+                                , fieldWithPath("user.createdOn.time.nano").description("The nano when the user created")
+                        )
+                ));
 
     }
 }

@@ -21,6 +21,8 @@ public class UserController {
     @GetMapping("/user")
     public Map<String, Object> user(OAuth2Authentication user) {
         Map<String, Object> result = new HashMap<>();
+        if(user.getUserAuthentication().getPrincipal() instanceof User)
+            ((User) user.getUserAuthentication().getPrincipal()).setPassword(null);//clear the password before returning
         result.put("user", user.getUserAuthentication().getPrincipal());
         return result;
     }
