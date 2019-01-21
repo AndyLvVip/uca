@@ -9,3 +9,4 @@ uca:
     client:
       id: portal
       secret: portal$ecret
+      scope: webclient
