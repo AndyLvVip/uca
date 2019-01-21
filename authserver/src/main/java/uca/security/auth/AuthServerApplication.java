@@ -22,10 +22,10 @@ import javax.sql.DataSource;
 @EnableEurekaClient
 @EnableResourceServer
 @EnableAuthorizationServer
-public class AuthApplication {
+public class AuthServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthApplication.class, args);
+        SpringApplication.run(AuthServerApplication.class, args);
     }
 
     @Bean

@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uca.security.auth.CustomizationConfiguration.restDocument;
 
-@SpringBootTest(classes = AuthApplication.class)
+@SpringBootTest(classes = AuthServerApplication.class)
 @RunWith(SpringRunner.class)
 @Transactional
 @AutoConfigureRestDocs

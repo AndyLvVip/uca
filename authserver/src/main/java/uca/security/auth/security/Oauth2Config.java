@@ -34,8 +34,8 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("aspire")
-                .secret(passwordEncoder.encode("aspiresecret"))
+                .withClient("portal")
+                .secret(passwordEncoder.encode("portal$ecret"))
                 .authorizedGrantTypes(
                         "refresh_token",
                         "password",
