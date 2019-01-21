@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS `oauth_access_token` (
   `client_id` VARCHAR(256) NULL DEFAULT NULL,
   `authentication` BLOB NULL DEFAULT NULL,
   `refresh_token` VARCHAR(256) NULL DEFAULT NULL,
-PRIMARY KEY (`token_id`));
+PRIMARY KEY (`token_id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8);
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------

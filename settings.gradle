@@ -5,3 +5,5 @@ include 'eurekaserver'
 include 'zipkinservice'
 include 'gwserver'
 include 'gwserver'
+include 'authclient'
+
