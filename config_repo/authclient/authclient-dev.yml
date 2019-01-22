@@ -1,4 +1,12 @@
+server:
+  port: 8100
 spring:
   redis:
     host: 192.168.63.195
     port: 6379
+uca:
+  oauth2:
+    client:
+      id: portal
+      secret: portal$ecret
+      scope: webclient
