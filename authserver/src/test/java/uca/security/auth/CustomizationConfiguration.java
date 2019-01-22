@@ -2,10 +2,14 @@ package uca.security.auth;
 
 import org.springframework.boot.test.autoconfigure.restdocs.RestDocsMockMvcConfigurationCustomizer;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentationConfigurer;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.restdocs.snippet.Snippet;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 
@@ -27,4 +31,9 @@ public class CustomizationConfiguration implements RestDocsMockMvcConfigurationC
         return MockMvcRestDocumentation.document("{method-name}", snippets);
     }
 
+    @Bean
+    @Primary
+    TokenStore inMemoryTokenStore() {
+        return new InMemoryTokenStore();
+    }
 }

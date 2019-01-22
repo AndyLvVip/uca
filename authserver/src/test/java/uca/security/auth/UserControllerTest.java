@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,13 +21,15 @@ import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.transaction.annotation.Transactional;
 import uca.security.auth.domain.User;
+import uca.security.auth.repository.UserRepository;
 
+import javax.sql.DataSource;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Base64;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
@@ -38,12 +42,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uca.security.auth.CustomizationConfiguration.restDocument;
 
-@SpringBootTest(classes = AuthServerApplication.class)
-@RunWith(SpringRunner.class)
-@Transactional
+@SpringBootTest
 @AutoConfigureRestDocs
 @AutoConfigureMockMvc
 @Import(CustomizationConfiguration.class)
+@RunWith(SpringRunner.class)
+@EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
 public class UserControllerTest {
 
     @Autowired
@@ -58,8 +62,16 @@ public class UserControllerTest {
     @MockBean
     private UserDetailsService userDetailsService;
 
+    @MockBean
+    private UserRepository userRepository;
+
+    @MockBean
+    private DataSource dataSource;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+
 
     @Before
     public void setUp() {
@@ -75,6 +87,9 @@ public class UserControllerTest {
         user.setPassword(passwordEncoder.encode("password"));
         user.setCreatedOn(LocalDateTime.now());
         when(userDetailsService.loadUserByUsername("dummy")).thenReturn(user);
+
+        when(userRepository.save(any(User.class))).thenReturn(user);
+
     }
 
     @Test
