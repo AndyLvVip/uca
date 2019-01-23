@@ -8,4 +8,4 @@
 
 A `POST` request is used to login a new user for client
 
-operation::login[snippets='http-request,request-headers,request-fields,curl-request,http-response,response-fields']
+operation::login[snippets='http-request,request-headers,curl-request,http-response,response-fields']
