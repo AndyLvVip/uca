@@ -1,0 +1,19 @@
+server:
+  port: 7010
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: fileserver
+  jooq:
+    sql-dialect: mysql_8_0
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/file
+    username: uca
+    password: password
