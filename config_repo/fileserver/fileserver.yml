@@ -15,6 +15,6 @@ spring:
     sql-dialect: mysql_8_0
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/file
-    username: uca
+    username: andy
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
