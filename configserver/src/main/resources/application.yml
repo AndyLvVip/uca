@@ -6,4 +6,4 @@ spring:
       server:
         git:
           uri: https://github.com/AndyLvVip/uca
-          search-paths: config_repo/authserver,config_repo/eurekaserver,config_repo/gwserver,config_repo/zipkinservice,config_repo/authclient
+          search-paths: config_repo/authserver,config_repo/eurekaserver,config_repo/gwserver,config_repo/zipkinservice,config_repo/authclient,config_repo/fileserver

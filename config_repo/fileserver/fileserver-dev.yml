@@ -17,3 +17,4 @@ spring:
     url: jdbc:mysql://192.168.63.195:3306/file
     username: uca
     password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
