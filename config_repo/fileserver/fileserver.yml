@@ -9,8 +9,6 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 spring:
-  application:
-    name: fileserver
   jooq:
     sql-dialect: mysql_8_0
   datasource:
@@ -18,3 +16,6 @@ spring:
     username: andy
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    port: 6379
