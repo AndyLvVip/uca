@@ -26,3 +26,9 @@ uca:
     url: http://localhost:7010
     real-file-path: /opt/uca/file
     temp-file-path: /opt/uca/temp
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8901/authserver/user
+    client:
+      grant-type: client_credentials
