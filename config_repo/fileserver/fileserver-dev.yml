@@ -29,6 +29,6 @@ uca:
 security:
   oauth2:
     resource:
-      user-info-uri: http://localhost:8901/authserver/user
+      user-info-uri: http://gwserver/authserver/user
     client:
       grant-type: client_credentials
