@@ -7,7 +7,7 @@ spring:
     config:
       server:
         native:
-          search-locations: file:./config_repo/authserver,file:./config_repo/eurekaserver,file:./config_repo/gwserver,file:./config_repo/zipkinservice,file:./config_repo/authclient,file:./config_repo/fileserver
+          search-locations: file:./config_repo/authserver,file:./config_repo/eurekaserver,file:./config_repo/gwserver,file:./config_repo/zipkinservice,file:./config_repo/authclient,file:./config_repo/fileserver,file:./config_repo/msgpush
         git:
           uri: https://github.com/AndyLvVip/uca
-          search-paths: config_repo/authserver,config_repo/eurekaserver,config_repo/gwserver,config_repo/zipkinservice,config_repo/authclient,config_repo/fileserver
+          search-paths: config_repo/authserver,config_repo/eurekaserver,config_repo/gwserver,config_repo/zipkinservice,config_repo/authclient,config_repo/fileserver,config_repo/msgpush

@@ -1,0 +1,46 @@
+server:
+  port: 7020
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  jooq:
+    sql-dialect: mysql_8_0
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/msgpush
+    username: andy
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  cloud:
+    stream:
+      bindings:
+        input-bind-user:
+          group: input-bind-user
+          destination: msgpush-bind-user
+          content-type: application/json
+        input-unbind-user:
+          group: input-unbind-user
+          destination: msgpush-unbind-user
+          content-type: application/json
+        output-bind-user:
+          group: output-bind-user
+          destination: msgpush-bind-user
+          content-type: application/json
+        output-unbind-user:
+          group: output-unbind-user
+          destination: msgpush-unbind-user
+          content-type: application/json
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8901/user
+    client:
+      grant-type: client_credentials
