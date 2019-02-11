@@ -65,6 +65,7 @@ public class UserControllerTest {
     @MockBean
     private UserRepository userRepository;
 
+    //项目启动时需要注入dataSource，所以使用MockBean
     @MockBean
     private DataSource dataSource;
 

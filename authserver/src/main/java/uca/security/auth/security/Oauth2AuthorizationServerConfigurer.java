@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
-public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
+public class Oauth2AuthorizationServerConfigurer extends AuthorizationServerConfigurerAdapter {
 
     private final AuthenticationManager authenticationManager;
 
@@ -20,10 +20,10 @@ public class Oauth2Config extends AuthorizationServerConfigurerAdapter {
 
     private final TokenStore tokenStore;
 
-    public Oauth2Config(AuthenticationManager authenticationManagerBean,
-                        UserDetailsService userDetailsServiceBean,
-                        PasswordEncoder passwordEncoder,
-                        TokenStore tokenStore
+    public Oauth2AuthorizationServerConfigurer(AuthenticationManager authenticationManagerBean,
+                                               UserDetailsService userDetailsServiceBean,
+                                               PasswordEncoder passwordEncoder,
+                                               TokenStore tokenStore
     ) {
         this.authenticationManager = authenticationManagerBean;
         this.userDetailsService = userDetailsServiceBean;

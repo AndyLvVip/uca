@@ -20,12 +20,12 @@ spring:
     host: 192.168.63.195
     port: 6379
   resources:
-    static-locations: file:${uca.fileserver.real-file-path},file:${uca.fileserver.temp-file-path}
+    static-locations: file:${uca.fileserver.exposed-location}
 uca:
   fileserver:
     url: http://localhost:7010
-    real-file-path: /opt/uca/file
-    temp-file-path: /opt/uca/temp
+    real-file-path: ${uca.fileserver.exposed-location}/media
+    exposed-location: /opt/uca/file
 security:
   oauth2:
     resource:

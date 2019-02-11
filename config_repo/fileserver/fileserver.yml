@@ -12,7 +12,7 @@ spring:
   jooq:
     sql-dialect: mysql_8_0
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/file
+    url: jdbc:mysql://127.0.0.1:3306/file?allowMultiQueries=true
     username: andy
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -20,12 +20,12 @@ spring:
     host: 127.0.0.1
     port: 6379
   resources:
-    static-locations: file:${uca.fileserver.real-file-path},file:${uca.fileserver.temp-file-path}
+    static-locations: file:${uca.fileserver.exposed-location}
 uca:
   fileserver:
     url: http://localhost:7010
-    real-file-path: /opt/uca/file
-    temp-file-path: /opt/uca/temp
+    real-file-path: ${uca.fileserver.exposed-location}/media
+    exposed-location: /opt/uca/file
 security:
   oauth2:
     resource:
