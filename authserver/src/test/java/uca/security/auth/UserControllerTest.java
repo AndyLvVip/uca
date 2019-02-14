@@ -177,13 +177,7 @@ public class UserControllerTest {
                         )
                         , responseFields(
                                 fieldWithPath("user.username").description("Username of the user")
-                                , fieldWithPath("user.createdOn.date.year").description("The year when the user created")
-                                , fieldWithPath("user.createdOn.date.month").description("The month when the user created")
-                                , fieldWithPath("user.createdOn.date.day").description("The day when the user created")
-                                , fieldWithPath("user.createdOn.time.hour").description("The hour when the user created")
-                                , fieldWithPath("user.createdOn.time.minute").description("The minute when the user created")
-                                , fieldWithPath("user.createdOn.time.second").description("The second when the user created")
-                                , fieldWithPath("user.createdOn.time.nano").description("The nano when the user created")
+                                , fieldWithPath("user.createdOn").description("The datetime of the creation")
                         )
                 ));
 

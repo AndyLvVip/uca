@@ -6,4 +6,5 @@ include 'zipkinservice'
 include 'gwserver'
 include 'gwserver'
 include 'authclient'
+include 'util'
 

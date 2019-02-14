@@ -12,12 +12,12 @@ spring:
   jooq:
     sql-dialect: mysql_8_0
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/msgpush
-    username: andy
+    url: jdbc:mysql://192.168.63.195:3306/msgpush
+    username: uca
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
-    host: 127.0.0.1
+    host: 192.168.63.195
     port: 6379
   cloud:
     stream:
@@ -39,7 +39,7 @@ spring:
           destination: msgpush-unbind-user
           content-type: application/json
   rabbitmq:
-    host: 127.0.0.1
+    host: 192.168.63.195
     port: 5672
     username: guest
     password: guest
